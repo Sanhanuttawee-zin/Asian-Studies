@@ -9,7 +9,6 @@
 <style>
   :root {
     --lapis: #1a3a5c;
-    --lapis-light: #2a5080;
     --gold: #c9933a;
     --gold-light: #e8b86d;
     --terracotta: #c1572a;
@@ -19,670 +18,175 @@
     --text: #2d2416;
     --muted: #7a6a57;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
-  body {
-    font-family: 'Cormorant Garamond', serif;
-    background: var(--cream);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* ─── NAV ─── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    background: rgba(14,30,45,0.97);
-    backdrop-filter: blur(10px);
-    padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
-    border-bottom: 1px solid rgba(201,147,58,0.3);
+    background: rgba(14,30,45,0.97); backdrop-filter: blur(10px);
+    padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between;
+    height: 60px; border-bottom: 1px solid rgba(201,147,58,0.3);
   }
-
-  .nav-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--gold-light);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex; gap: 0; list-style: none;
-    overflow-x: auto;
-  }
-
-  .nav-links a {
-    color: rgba(245,234,216,0.75);
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 0.5rem 0.85rem;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
+  .nav-links { display: flex; list-style: none; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { color: rgba(245,234,216,0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.5rem 0.7rem; transition: color 0.2s; white-space: nowrap; }
   .nav-links a:hover { color: var(--gold-light); }
 
-  /* ─── HERO ─── */
-  #hero {
-    height: 100vh;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    background: var(--dark);
-  }
-
+  /* HERO */
+  .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
-      linear-gradient(160deg, rgba(26,58,92,0.85) 0%, rgba(14,30,45,0.7) 50%, rgba(193,87,42,0.4) 100%),
-      url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Band-e-Amir.jpg/1280px-Band-e-Amir.jpg') center/cover no-repeat;
-    transform: scale(1.05);
+    background-image: linear-gradient(160deg, rgba(14,30,45,0.78) 0%, rgba(26,58,92,0.6) 50%, rgba(193,87,42,0.5) 100%), url('https://images.unsplash.com/photo-1564503164723-c5e39a46b86e?w=1600&q=85');
+    background-size: cover; background-position: center;
     animation: heroZoom 20s ease-in-out infinite alternate;
   }
-
-  @keyframes heroZoom {
-    from { transform: scale(1.05); }
-    to   { transform: scale(1.12); }
-  }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .hero-eyebrow {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 12vw, 10rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.6s forwards;
-  }
-
-  .hero-title span {
-    display: block;
-    font-style: italic;
-    color: var(--gold-light);
-    font-size: 0.55em;
-    letter-spacing: 4px;
-  }
-
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: rgba(245,234,216,0.9);
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeUp 1s 0.9s forwards;
-  }
-
-  .hero-scroll {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.2s forwards;
-    border: 1px solid var(--gold);
-    padding: 0.75rem 2rem;
-    transition: all 0.3s;
-  }
-
-  .hero-scroll:hover { background: var(--gold); color: var(--dark); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─── ORNAMENT ─── */
-  .ornament {
-    text-align: center;
-    color: var(--gold);
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    letter-spacing: 8px;
-  }
-
-  /* ─── SECTIONS ─── */
-  section {
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-full {
-    max-width: 100%;
-    padding: 0;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .section-number {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--lapis);
-    line-height: 1.1;
-    margin-bottom: 1rem;
-  }
-
-  .section-desc {
-    font-size: 1.15rem;
-    color: var(--muted);
-    max-width: 640px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-
-  .divider {
-    width: 60px; height: 2px;
-    background: var(--gold);
-    margin: 1.2rem auto;
-  }
-
-  /* ─── ALTERNATING BAND ─── */
-  .band {
-    background: var(--lapis);
-    padding: 6rem 2rem;
-  }
-  .band .section-title { color: var(--gold-light); }
-  .band .section-desc  { color: rgba(245,234,216,0.75); }
-  .band .section-number { color: var(--gold-light); opacity:0.7; }
-  .band .card-grid .card { background: rgba(255,255,255,0.07); border-color: rgba(201,147,58,0.25); }
-  .band .card-grid .card h3 { color: var(--gold-light); }
-  .band .card-grid .card p  { color: rgba(245,234,216,0.75); }
-
-  .band-sand {
-    background: var(--sand);
-    padding: 6rem 2rem;
-  }
-
-  /* ─── CARD GRID ─── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .card {
-    background: #fff;
-    border: 1px solid rgba(201,147,58,0.2);
-    border-radius: 2px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(26,58,92,0.12);
-  }
-
-  .card-img {
-    width: 100%; height: 200px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .card-body { padding: 1.5rem; }
-
-  .card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--lapis);
-    margin-bottom: 0.5rem;
-  }
-
-  .card p {
-    font-size: 0.95rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ─── VIDEO EMBED ─── */
-  .video-wrap {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 2px;
-    border: 2px solid var(--gold);
-  }
-
-  .video-wrap iframe {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: none;
-  }
-
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .video-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 0.75rem;
-    text-align: center;
-  }
-
-  /* ─── SPLIT LAYOUT ─── */
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .split.reverse { direction: rtl; }
-  .split.reverse > * { direction: ltr; }
-
-  @media(max-width: 768px) {
-    .split, .split.reverse { grid-template-columns: 1fr; direction: ltr; }
-    nav .nav-links { display: none; }
-  }
-
-  .split-img {
-    width: 100%; aspect-ratio: 4/3;
-    object-fit: cover;
-    border-radius: 2px;
-    border: 3px solid var(--gold);
-  }
-
-  .split-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--lapis);
-    margin-bottom: 1rem;
-  }
-
-  .split-text p {
-    font-size: 1.05rem;
-    line-height: 1.85;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .band .split-text h3 { color: var(--gold-light); }
-  .band .split-text p  { color: rgba(245,234,216,0.8); }
-
-  /* ─── STAT BAND ─── */
-  .stat-row {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
-    max-width: 1200px; margin: 0 auto;
-  }
-
-  .stat-box {
-    text-align: center;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(201,147,58,0.3);
-    padding: 2rem 2.5rem;
-    min-width: 180px;
-    flex: 1;
-    max-width: 220px;
-  }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--gold-light);
-    display: block;
-  }
-
-  .stat-lbl {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(245,234,216,0.65);
-    margin-top: 0.5rem;
-    display: block;
-  }
-
-  /* ─── FLAG STRIP ─── */
-  .flag-strip {
-    background: linear-gradient(to right, #000 33.33%, #c00 33.33% 66.66%, #007736 66.66%);
-    height: 6px;
-  }
-
-  /* ─── TOC GRID ─── */
-  .toc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .toc-item {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    border: 1px solid rgba(201,147,58,0.3);
-    background: var(--cream);
-    text-decoration: none;
-    transition: all 0.3s;
-    display: block;
-  }
-
-  .toc-item:hover {
-    background: var(--lapis);
-    border-color: var(--gold);
-  }
-
-  .toc-item:hover .toc-num,
-  .toc-item:hover .toc-name { color: var(--gold-light); }
-
-  .toc-num {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.4rem;
-  }
-
-  .toc-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--lapis);
-  }
-
-  /* ─── LANG LIST ─── */
-  .lang-list {
-    display: flex; flex-wrap: wrap; gap: 0.75rem;
-    justify-content: center; margin-top: 1.5rem;
-  }
-
-  .lang-tag {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.5rem 1.25rem;
-    border: 2px solid var(--gold-light);
-    color: var(--gold-light);
-    background: transparent;
-    border-radius: 0;
-  }
-
-  /* ─── TIMELINE ─── */
-  .timeline {
-    max-width: 700px; margin: 0 auto;
-    position: relative;
-    padding-left: 2rem;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--gold), var(--terracotta));
-  }
-
-  .tl-item {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-left: 1.5rem;
-  }
-
-  .tl-item::before {
-    content: '';
-    position: absolute; left: -1.95rem; top: 0.4rem;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--cream);
-  }
-
-  .tl-year {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .tl-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    color: var(--lapis);
-    margin: 0.25rem 0;
-  }
-
-  .tl-text {
-    font-size: 0.95rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ─── GALLERY ─── */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 200px 200px;
-    gap: 0.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .gallery img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: opacity 0.3s;
-  }
-
-  .gallery img:hover { opacity: 0.85; }
-
-  .gallery .g-wide {
-    grid-column: span 2;
-  }
-
-  @media(max-width: 600px) {
-    .gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
-    .gallery .g-wide { grid-column: span 1; }
-  }
-
-  /* ─── QUOTE ─── */
-  .pull-quote {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    position: relative;
-  }
-
-  .pull-quote::before {
-    content: '\201C';
-    font-family: 'Playfair Display', serif;
-    font-size: 8rem;
-    color: var(--gold);
-    opacity: 0.2;
-    position: absolute; top: -1rem; left: 1rem;
-    line-height: 1;
-  }
-
-  .pull-quote p {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 3vw, 2rem);
-    font-style: italic;
-    color: var(--lapis);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  .pull-quote cite {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--dark);
-    padding: 3rem 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(201,147,58,0.3);
-  }
-
-  footer .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--gold-light);
-    margin-bottom: 0.5rem;
-  }
-
-  footer p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(245,234,216,0.4);
-  }
-
-  /* ─── SCROLL REVEAL ─── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ─── PROGRESS BAR SKILL ─── */
-  .skill-bar-wrap { margin: 0.75rem 0; }
-  .skill-label {
-    display: flex; justify-content: space-between;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(245,234,216,0.75);
-    margin-bottom: 0.4rem;
-  }
-  .skill-track {
-    height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;
-  }
-  .skill-fill {
-    height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    border-radius: 2px;
-    width: 0;
-    transition: width 1.5s ease 0.3s;
-  }
-
-  /* ─── ACCORDION ─── */
-  .accordion { max-width: 800px; margin: 0 auto; }
-  .acc-item {
-    border-bottom: 1px solid rgba(201,147,58,0.25);
-  }
-  .acc-head {
-    width: 100%; background: none; border: none; cursor: pointer;
-    text-align: left; padding: 1.2rem 0;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .acc-head span {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    color: var(--gold-light);
-  }
-  .acc-icon {
-    color: var(--gold); font-size: 1.2rem; transition: transform 0.3s;
-  }
-  .acc-body {
-    max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
-  }
-  .acc-body.open { max-height: 400px; }
-  .acc-body p {
-    font-size: 1rem; color: rgba(245,234,216,0.75); line-height: 1.8;
-    padding-bottom: 1.2rem;
-  }
-
-  /* back to top */
-  .btt {
-    position: fixed; bottom: 2rem; right: 2rem;
-    width: 44px; height: 44px;
-    background: var(--gold);
-    color: var(--dark);
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: background 0.3s;
-    z-index: 999;
-  }
+  @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(4rem, 12vw, 10rem); font-weight: 900; color: #fff; line-height: 0.9; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.6s forwards; }
+  .hero-title span { display: block; font-style: italic; color: var(--gold-light); font-size: 0.5em; letter-spacing: 4px; margin-top: 0.3em; }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: rgba(245,234,216,0.9); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; opacity: 0; animation: fadeUp 1s 0.9s forwards; }
+  .hero-btn { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); text-decoration: none; display: inline-block; border: 1px solid var(--gold); padding: 0.85rem 2.5rem; transition: all 0.3s; opacity: 0; animation: fadeUp 1s 1.2s forwards; }
+  .hero-btn:hover { background: var(--gold); color: var(--dark); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* FLAG */
+  .flag-strip { display: flex; height: 8px; }
+  .flag-strip div { flex: 1; }
+  .fb { background: #000; } .fr { background: #c00; } .fg { background: #007736; }
+
+  /* LAYOUT */
+  .sec-cream { background: var(--cream); }
+  .sec-sand  { background: var(--sand); }
+  .sec-lapis { background: var(--lapis); }
+  .inner { max-width: 1160px; margin: 0 auto; padding: 5rem 2rem; }
+
+  /* SECTION HEADER */
+  .sec-head { text-align: center; margin-bottom: 3.5rem; }
+  .sec-num { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.4rem; }
+  .sec-lapis .sec-num { color: var(--gold-light); opacity: 0.8; }
+  .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: var(--lapis); line-height: 1.1; }
+  .sec-lapis .sec-title { color: var(--gold-light); }
+  .divider { width: 50px; height: 2px; background: var(--gold); margin: 1rem auto; }
+  .sec-desc { font-size: 1.1rem; color: var(--muted); max-width: 640px; margin: 0 auto; line-height: 1.8; }
+  .sec-lapis .sec-desc { color: rgba(245,234,216,0.75); }
+
+  /* CARD GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+  .card { background: #fff; border: 1px solid rgba(201,147,58,0.2); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(26,58,92,0.12); }
+  .sec-lapis .card { background: rgba(255,255,255,0.07); border-color: rgba(201,147,58,0.25); }
+  .card-img { width: 100%; height: 210px; object-fit: cover; display: block; background: #c0b8a8; }
+  .card-body { padding: 1.4rem; flex: 1; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--lapis); margin-bottom: 0.5rem; }
+  .sec-lapis .card h3 { color: var(--gold-light); }
+  .card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+  .sec-lapis .card p { color: rgba(245,234,216,0.75); }
+
+  /* VIDEO GRID */
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 2px solid var(--gold); }
+  .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-top: 0.6rem; text-align: center; }
+  .sec-lapis .video-label { color: var(--gold-light); }
+
+  /* SPLIT */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+  .split-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border: 3px solid var(--gold); background: #c0b8a8; display: block; }
+  .split-text h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--lapis); margin-bottom: 1rem; }
+  .sec-lapis .split-text h3 { color: var(--gold-light); }
+  .split-text p { font-size: 1rem; line-height: 1.85; color: var(--muted); margin-bottom: 0.9rem; }
+  .sec-lapis .split-text p { color: rgba(245,234,216,0.8); }
+
+  /* TOC */
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.9rem; }
+  .toc-item { text-align: center; padding: 1.4rem 1rem; border: 1px solid rgba(201,147,58,0.3); background: var(--cream); text-decoration: none; transition: all 0.3s; display: block; }
+  .toc-item:hover { background: var(--lapis); border-color: var(--gold); }
+  .toc-num { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; color: var(--gold); display: block; margin-bottom: 0.3rem; }
+  .toc-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--lapis); }
+  .toc-item:hover .toc-num, .toc-item:hover .toc-name { color: var(--gold-light); }
+
+  /* TIMELINE */
+  .timeline { max-width: 680px; margin: 0 auto; position: relative; padding-left: 2.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--terracotta)); }
+  .tl-item { position: relative; margin-bottom: 2.2rem; }
+  .tl-item::before { content: ''; position: absolute; left: -2.4rem; top: 0.35rem; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--cream); }
+  .tl-year { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+  .tl-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--lapis); margin: 0.2rem 0; }
+  .tl-text { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+  /* STAT */
+  .stat-band { background: var(--lapis); padding: 2.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
+  .stat-box { text-align: center; border: 1px solid rgba(201,147,58,0.3); padding: 1.8rem 2rem; min-width: 160px; flex: 1; max-width: 200px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold-light); display: block; }
+  .stat-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,234,216,0.6); margin-top: 0.4rem; display: block; }
+
+  /* LANG TAGS */
+  .lang-list { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin-top: 2rem; }
+  .lang-tag { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.5rem 1.2rem; border: 2px solid var(--gold); color: var(--gold); }
+
+  /* GALLERY */
+  .gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 6px; margin-bottom: 3rem; }
+  .g-item { overflow: hidden; }
+  .g-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; background: #c0b8a8; }
+  .g-item img:hover { transform: scale(1.05); }
+  .g-tall { grid-row: span 2; }
+
+  /* ACCORDION */
+  .accordion { max-width: 760px; margin: 2rem auto 0; }
+  .acc-item { border-bottom: 1px solid rgba(201,147,58,0.3); }
+  .acc-head { width: 100%; background: none; border: none; cursor: pointer; text-align: left; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .acc-head span:first-child { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold-light); }
+  .acc-icon { color: var(--gold); font-size: 1.2rem; }
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .acc-body.open { max-height: 300px; }
+  .acc-body p { font-size: 0.98rem; color: rgba(245,234,216,0.75); line-height: 1.8; padding-bottom: 1.2rem; }
+
+  /* QUOTE */
+  .pull-quote { text-align: center; max-width: 800px; margin: 0 auto; padding: 3rem 2rem; position: relative; }
+  .pull-quote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem; color: var(--gold); opacity: 0.15; position: absolute; top: -1rem; left: 1rem; line-height: 1; }
+  .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.9rem); font-style: italic; line-height: 1.6; margin-bottom: 1rem; }
+  .sec-lapis .pull-quote p, .closing-band .pull-quote p { color: var(--sand); }
+  .sec-cream .pull-quote p { color: var(--lapis); }
+  .pull-quote cite { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+
+  /* CLOSING */
+  .closing-band { background: var(--lapis); padding: 5rem 2rem; text-align: center; }
+  .ornament { color: var(--gold); font-size: 1.5rem; letter-spacing: 8px; margin: 1rem 0; }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,147,58,0.3); }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold-light); margin-bottom: 0.5rem; }
+  footer p { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,234,216,0.35); }
+  footer p + p { margin-top: 0.4rem; }
+
+  /* BTT */
+  .btt { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 44px; height: 44px; background: var(--gold); color: var(--dark); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; font-weight: bold; z-index: 999; transition: background 0.3s; }
   .btt:hover { background: var(--gold-light); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .split { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px; }
+    .g-tall { grid-row: span 1; }
+  }
+  @media (max-width: 480px) {
+    .gallery { grid-template-columns: 1fr; }
+    .g-item { height: 200px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ─── NAVIGATION ─── -->
-<nav>
+<nav id="top">
   <div class="nav-brand">🇦🇫 Afghanistan</div>
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
@@ -700,60 +204,55 @@
   </ul>
 </nav>
 
-<!-- ─── HERO ─── -->
-<section id="top" class="section-full">
-  <div id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Discover Asia &bull; Central Highlands</p>
-      <h1 class="hero-title">
-        Afghanistan
-        <span>Land of Light & Legend</span>
-      </h1>
-      <p class="hero-sub">
-        A country of breathtaking mountains, ancient silk-road cities, and a people whose resilience echoes through millennia of history.
-      </p>
-      <a href="#toc" class="hero-scroll">Explore Now ↓</a>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Discover Asia &bull; Central Highlands</p>
+    <h1 class="hero-title">Afghanistan<span>Land of Light &amp; Legend</span></h1>
+    <p class="hero-sub">A country of breathtaking mountains, ancient silk-road cities, and a people whose resilience echoes through millennia of history.</p>
+    <a href="#toc" class="hero-btn">Explore Now ↓</a>
+  </div>
+</div>
+
+<div class="flag-strip"><div class="fb"></div><div class="fr"></div><div class="fg"></div></div>
+
+<!-- TOC -->
+<div class="sec-cream" id="toc">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">— Table of Contents —</span>
+      <h2 class="sec-title">What's Inside</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="toc-grid reveal">
+      <a href="#overview"      class="toc-item"><span class="toc-num">001</span><span class="toc-name">Overview</span></a>
+      <a href="#health"        class="toc-item"><span class="toc-num">002</span><span class="toc-name">Health &amp; Wellness</span></a>
+      <a href="#politics"      class="toc-item"><span class="toc-num">003</span><span class="toc-name">Political Leadership</span></a>
+      <a href="#personality"   class="toc-item"><span class="toc-num">004</span><span class="toc-name">Personality</span></a>
+      <a href="#festivals"     class="toc-item"><span class="toc-num">005</span><span class="toc-name">Cultural Festivals</span></a>
+      <a href="#entertainment" class="toc-item"><span class="toc-num">006</span><span class="toc-name">Local Entertainment</span></a>
+      <a href="#languages"     class="toc-item"><span class="toc-num">007</span><span class="toc-name">Languages &amp; Dialects</span></a>
+      <a href="#sports"        class="toc-item"><span class="toc-num">008</span><span class="toc-name">Traditional Sports</span></a>
+      <a href="#beauty"        class="toc-item"><span class="toc-num">009</span><span class="toc-name">Asian Beauty</span></a>
+      <a href="#population"    class="toc-item"><span class="toc-num">010</span><span class="toc-name">Population</span></a>
+      <a href="#communication" class="toc-item"><span class="toc-num">011</span><span class="toc-name">Communication</span></a>
+      <a href="#environment"   class="toc-item"><span class="toc-num">012</span><span class="toc-name">Environment</span></a>
     </div>
   </div>
-</section>
+</div>
 
-<div class="flag-strip"></div>
-
-<!-- ─── TABLE OF CONTENTS ─── -->
-<section id="toc">
-  <div class="section-header reveal">
-    <span class="section-number">— Contents —</span>
-    <h2 class="section-title">What's Inside</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="toc-grid reveal">
-    <a href="#overview" class="toc-item"><span class="toc-num">001</span><span class="toc-name">Overview</span></a>
-    <a href="#health" class="toc-item"><span class="toc-num">002</span><span class="toc-name">Health & Wellness</span></a>
-    <a href="#politics" class="toc-item"><span class="toc-num">003</span><span class="toc-name">Political Leadership</span></a>
-    <a href="#personality" class="toc-item"><span class="toc-num">004</span><span class="toc-name">Personality</span></a>
-    <a href="#festivals" class="toc-item"><span class="toc-num">005</span><span class="toc-name">Cultural Festivals</span></a>
-    <a href="#entertainment" class="toc-item"><span class="toc-num">006</span><span class="toc-name">Local Entertainment</span></a>
-    <a href="#languages" class="toc-item"><span class="toc-num">007</span><span class="toc-name">Languages & Dialects</span></a>
-    <a href="#sports" class="toc-item"><span class="toc-num">008</span><span class="toc-name">Traditional Sports</span></a>
-    <a href="#beauty" class="toc-item"><span class="toc-num">009</span><span class="toc-name">Asian Beauty</span></a>
-    <a href="#population" class="toc-item"><span class="toc-num">010</span><span class="toc-name">Population</span></a>
-    <a href="#communication" class="toc-item"><span class="toc-num">011</span><span class="toc-name">Communication</span></a>
-    <a href="#environment" class="toc-item"><span class="toc-num">012</span><span class="toc-name">Environment</span></a>
-  </div>
-</section>
-
-<!-- ─── 001 OVERVIEW ─── -->
-<div class="band-sand" id="overview">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">001 — Asian Country</span>
-      <h2 class="section-title">Discover Afghanistan</h2>
+<!-- 001 OVERVIEW -->
+<div class="sec-sand" id="overview">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">001 — Asian Country</span>
+      <h2 class="sec-title">Discover Afghanistan</h2>
       <div class="divider"></div>
-      <p class="section-desc">Located at the heart of Asia, Afghanistan is a landlocked nation bordering six countries, steeped in a history stretching back more than 5,000 years.</p>
+      <p class="sec-desc">Located at the heart of Asia, Afghanistan is a landlocked nation bordering six countries, steeped in a history stretching back more than 5,000 years.</p>
     </div>
     <div class="split reveal">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Kabul%2C_Afghanistan_view.jpg">
+      <img src="https://images.unsplash.com/photo-1564503164723-c5e39a46b86e?w=800&q=80" alt="Afghan mountain landscape" class="split-img" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'">
       <div class="split-text">
         <h3>A Nation at the Crossroads of Civilizations</h3>
         <p>Afghanistan sits at the nexus of Central Asia, South Asia, and the Middle East. Its capital, <strong>Kabul</strong>, sits 1,800 metres above sea level. The country covers <strong>652,000 km²</strong> — slightly larger than France.</p>
@@ -761,587 +260,372 @@
         <p>Afghanistan is home to extraordinary natural wonders including the turquoise lakes of <strong>Band-e-Amir</strong>, the soaring peaks of the <strong>Hindu Kush</strong>, and the vast deserts of <strong>Registan</strong>.</p>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/jh_5pQvSESs" allowfullscreen loading="lazy" title="Afghanistan Overview"></iframe>
-        </div>
-        <p class="video-label">Afghanistan — Country Overview</p>
-      </div>
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/kXSWnEPSbeg" allowfullscreen loading="lazy" title="Afghanistan Geography"></iframe>
-        </div>
-        <p class="video-label">Geography & Landscapes</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/jh_5pQvSESs" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Afghanistan — Country Overview</p></div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/kXSWnEPSbeg" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Geography &amp; Landscapes</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 002 HEALTH ─── -->
-<div class="band" id="health">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">002 — Health & Wellness</span>
-      <h2 class="section-title" style="color:var(--gold-light)">Healing Traditions & Healthcare</h2>
+<!-- 002 HEALTH -->
+<div class="sec-lapis" id="health">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">002 — Health &amp; Wellness</span>
+      <h2 class="sec-title">Healing Traditions &amp; Healthcare</h2>
       <div class="divider"></div>
-      <p class="section-desc" style="color:rgba(245,234,216,0.75)">Traditional medicine rooted in Unani-Tibb coexists with modern medical efforts to serve a population across challenging terrain.</p>
+      <p class="sec-desc">Traditional medicine rooted in Unani-Tibb coexists with modern medical efforts to serve a population across challenging terrain.</p>
     </div>
     <div class="card-grid reveal">
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kabul_hospital.jpg/640px-Kabul_hospital.jpg" alt="Hospital in Afghanistan" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=500'">
-        <div class="card-body">
-          <h3>Traditional Unani Medicine</h3>
-          <p>Afghan healers have practiced <em>Unani-Tibb</em> — Greek-inspired herbal medicine — for centuries. Plants like <em>Boswellia</em>, saffron, and pomegranate are cornerstone remedies.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80" alt="Healthcare" class="card-img">
+        <div class="card-body"><h3>Traditional Unani Medicine</h3><p>Afghan healers have practiced <em>Unani-Tibb</em> — Greek-inspired herbal medicine — for centuries. Plants like <em>Boswellia</em>, saffron, and pomegranate are cornerstone remedies.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&q=80" alt="Herbal Market" class="card-img">
-        <div class="card-body">
-          <h3>Modern Healthcare</h3>
-          <p>Despite decades of conflict, Afghanistan has increased basic health coverage. Life expectancy has risen from 42 years in 2000 to approximately 64 years today through NGO and government effort.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80" alt="Herbal Market" class="card-img">
+        <div class="card-body"><h3>Modern Healthcare</h3><p>Despite decades of conflict, life expectancy has risen from 42 years in 2000 to approximately 64 years today through NGO and government effort.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80" alt="Mental Wellness" class="card-img">
-        <div class="card-body">
-          <h3>Afghan Diet & Wellness</h3>
-          <p>The Afghan diet — rich in whole grains, legumes, dried fruit, and lamb — reflects a Mediterranean-influenced approach. Green tea (<em>chai</em>) is a daily wellness ritual.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80" alt="Afghan Diet" class="card-img">
+        <div class="card-body"><h3>Afghan Diet &amp; Wellness</h3><p>The Afghan diet — rich in whole grains, legumes, dried fruit, and lamb — reflects a Mediterranean-influenced approach. Green tea (<em>chai</em>) is a daily wellness ritual.</p></div>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/PFGTVzz5I4I" allowfullscreen loading="lazy" title="Healthcare Afghanistan"></iframe>
-        </div>
-        <p class="video-label" style="color:var(--gold-light)">Healthcare in Afghanistan</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/PFGTVzz5I4I" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Healthcare in Afghanistan</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 003 POLITICS ─── -->
-<div id="politics" style="background:var(--cream)">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">003 — Political Leadership</span>
-      <h2 class="section-title">Leadership & Governance</h2>
+<!-- 003 POLITICS -->
+<div class="sec-cream" id="politics">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">003 — Political Leadership</span>
+      <h2 class="sec-title">Leadership &amp; Governance</h2>
       <div class="divider"></div>
-      <p class="section-desc">Afghanistan's political history spans tribal confederacies, monarchies, republics, and its current era under the Islamic Emirate of Afghanistan.</p>
+      <p class="sec-desc">Afghanistan's political history spans tribal confederacies, monarchies, republics, and its current era under the Islamic Emirate of Afghanistan.</p>
     </div>
     <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="tl-year">1747</div>
-        <div class="tl-title">Ahmad Shah Durrani</div>
-        <div class="tl-text">Founded the Durrani Empire — considered the first modern Afghan state. Known as the "Father of the Afghan Nation."</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1919</div>
-        <div class="tl-title">Independence from Britain</div>
-        <div class="tl-text">King Amanullah Khan won full sovereignty after the Third Anglo-Afghan War, modernizing the country through education and constitutional reform.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1973–1978</div>
-        <div class="tl-title">Republic to Revolution</div>
-        <div class="tl-text">Mohammad Daoud Khan abolished the monarchy; subsequent communist coup began a turbulent era of Soviet intervention and civil war.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2001–2021</div>
-        <div class="tl-title">Islamic Republic</div>
-        <div class="tl-text">Post-9/11, the US-backed Islamic Republic was established. Hamid Karzai and Ashraf Ghani served as presidents during two decades of nation-building.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2021–Present</div>
-        <div class="tl-title">Islamic Emirate</div>
-        <div class="tl-text">The Taliban regained control in August 2021. Supreme Leader Haibatullah Akhundzada heads the current government from Kandahar.</div>
-      </div>
+      <div class="tl-item"><div class="tl-year">1747</div><div class="tl-title">Ahmad Shah Durrani</div><div class="tl-text">Founded the Durrani Empire — the first modern Afghan state. Known as the "Father of the Afghan Nation."</div></div>
+      <div class="tl-item"><div class="tl-year">1919</div><div class="tl-title">Independence from Britain</div><div class="tl-text">King Amanullah Khan won full sovereignty after the Third Anglo-Afghan War, modernizing the country through education and constitutional reform.</div></div>
+      <div class="tl-item"><div class="tl-year">1973–1978</div><div class="tl-title">Republic to Revolution</div><div class="tl-text">Mohammad Daoud Khan abolished the monarchy; a subsequent communist coup began a turbulent era of Soviet intervention and civil war.</div></div>
+      <div class="tl-item"><div class="tl-year">2001–2021</div><div class="tl-title">Islamic Republic</div><div class="tl-text">Post-9/11, a US-backed Islamic Republic was established. Hamid Karzai and Ashraf Ghani served as presidents during two decades of nation-building.</div></div>
+      <div class="tl-item"><div class="tl-year">2021–Present</div><div class="tl-title">Islamic Emirate</div><div class="tl-text">The Taliban regained control in August 2021. Supreme Leader Haibatullah Akhundzada heads the current government from Kandahar.</div></div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/2zSxnV1Vqhk" allowfullscreen loading="lazy" title="Afghan Political History"></iframe>
-        </div>
-        <p class="video-label">Afghan Political History</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/2zSxnV1Vqhk" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Afghan Political History</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 004 PERSONALITY ─── -->
-<div class="band" id="personality">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">004 — Personality</span>
-      <h2 class="section-title" style="color:var(--gold-light)">The Afghan Character</h2>
+<!-- 004 PERSONALITY -->
+<div class="sec-lapis" id="personality">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">004 — Personality</span>
+      <h2 class="sec-title">The Afghan Character</h2>
       <div class="divider"></div>
-      <p class="section-desc" style="color:rgba(245,234,216,0.75)">Afghans are known worldwide for their fierce pride, legendary hospitality, deep loyalty, and love of poetry and storytelling.</p>
+      <p class="sec-desc">Afghans are known worldwide for their fierce pride, legendary hospitality, deep loyalty, and love of poetry and storytelling.</p>
     </div>
     <div class="split reveal">
       <div class="split-text">
-        <h3>Pashtunwali & the Code of Honor</h3>
+        <h3>Pashtunwali &amp; the Code of Honor</h3>
         <p><em>Pashtunwali</em> — the traditional Pashtun code of life — places <strong>hospitality (melmastia)</strong>, <strong>honor (namus)</strong>, and <strong>asylum (nanawatai)</strong> as sacred obligations. A guest must be protected even at personal cost.</p>
         <p>Afghans are celebrated for their warmth: strangers are seated at the best spot, served the finest food, and treated as honored guests. The phrase <em>"Mehman nawazi"</em> (love of guests) defines Afghan identity.</p>
-        <p>Resilience is perhaps the deepest trait. Centuries of invasion, war, and hardship have forged a people of extraordinary endurance — expressed through humor, poetry, and community bonds.</p>
+        <p>Resilience is perhaps the deepest trait — centuries of hardship have forged a people of extraordinary endurance, expressed through humor, poetry, and community bonds.</p>
       </div>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Afghan_man_smiling.jpg/640px-Afghan_man_smiling.jpg" alt="Afghan People" class="split-img" onerror="this.src='https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=80'">
+      <img src="https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=700&q=80" alt="Community" class="split-img">
     </div>
-    <br><br>
-    <div class="pull-quote reveal" style="margin: 0 auto;">
-      <p>"A river that forgets its source will become a desert."</p>
-      <cite>— Afghan Proverb</cite>
-    </div>
-  </section>
+    <div class="pull-quote reveal"><p>"A river that forgets its source will become a desert."</p><cite>— Afghan Proverb</cite></div>
+  </div>
 </div>
 
-<!-- ─── 005 FESTIVALS ─── -->
-<div id="festivals" style="background:var(--sand)">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">005 — Cultural Festivals</span>
-      <h2 class="section-title">Celebrations & Sacred Days</h2>
+<!-- 005 FESTIVALS -->
+<div class="sec-sand" id="festivals">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">005 — Cultural Festivals</span>
+      <h2 class="sec-title">Celebrations &amp; Sacred Days</h2>
       <div class="divider"></div>
-      <p class="section-desc">Afghan festivals blend Islamic observance with ancient Persian and Central Asian traditions — a vibrant tapestry of color, music, and community.</p>
+      <p class="sec-desc">Afghan festivals blend Islamic observance with ancient Persian and Central Asian traditions — a vibrant tapestry of color, music, and community.</p>
     </div>
     <div class="card-grid reveal">
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Nowruz_Afghanistan.jpg/640px-Nowruz_Afghanistan.jpg" alt="Nowruz" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80'">
-        <div class="card-body">
-          <h3>Nowruz — Persian New Year</h3>
-          <p>The spring equinox celebration on March 21st. Families gather, wear new clothes, and visit shrines. Mazar-i-Sharif's <em>Gul-e-Surkh</em> festival and flag-raising at the Blue Mosque are iconic.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="Nowruz" class="card-img">
+        <div class="card-body"><h3>Nowruz — Persian New Year</h3><p>The spring equinox celebration on March 21st. Families gather, wear new clothes, and visit shrines. Mazar-i-Sharif's <em>Gul-e-Surkh</em> festival and flag-raising at the Blue Mosque are iconic.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=500&q=80" alt="Eid celebration" class="card-img">
-        <div class="card-body">
-          <h3>Eid al-Fitr & Eid al-Adha</h3>
-          <p>After Ramadan and Hajj season, Afghans celebrate with prayer, feasts of <em>Qorma</em> and <em>Bolani</em>, new clothes for children, and the sharing of <em>Eidiyya</em> — gifts and sweets.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&q=80" alt="Eid" class="card-img">
+        <div class="card-body"><h3>Eid al-Fitr &amp; Eid al-Adha</h3><p>After Ramadan and Hajj season, Afghans celebrate with prayer, feasts of <em>Qorma</em> and <em>Bolani</em>, new clothes for children, and the sharing of <em>Eidiyya</em> — gifts and sweets.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1578922746465-3a80a228f223?w=500&q=80" alt="Traditional Market" class="card-img">
-        <div class="card-body">
-          <h3>Jeshen — Independence Day</h3>
-          <p>Celebrated on August 19th to commemorate independence from Britain in 1919. Historically marked with parades, buzkashi matches, kite festivals, and fireworks in Kabul.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80" alt="Jeshen Independence Day" class="card-img">
+        <div class="card-body"><h3>Jeshen — Independence Day</h3><p>Celebrated on August 19th to commemorate independence from Britain in 1919. Historically marked with parades, buzkashi matches, kite festivals, and fireworks in Kabul.</p></div>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/HmZRhT2UVRE" allowfullscreen loading="lazy" title="Nowruz Afghanistan"></iframe>
-        </div>
-        <p class="video-label">Nowruz Festival in Afghanistan</p>
-      </div>
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/VD3MN0_s8DQ" allowfullscreen loading="lazy" title="Afghan Festivals"></iframe>
-        </div>
-        <p class="video-label">Afghan Cultural Celebrations</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/HmZRhT2UVRE" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Nowruz Festival in Afghanistan</p></div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/VD3MN0_s8DQ" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Afghan Cultural Celebrations</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 006 ENTERTAINMENT ─── -->
-<div class="band" id="entertainment">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">006 — Local Entertainment</span>
-      <h2 class="section-title" style="color:var(--gold-light)">Art, Music & Cinema</h2>
+<!-- 006 ENTERTAINMENT -->
+<div class="sec-lapis" id="entertainment">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">006 — Local Entertainment</span>
+      <h2 class="sec-title">Art, Music &amp; Cinema</h2>
       <div class="divider"></div>
-      <p class="section-desc" style="color:rgba(245,234,216,0.75)">Despite hardships, Afghan creativity has never been extinguished — from ancient poetry to contemporary music and film.</p>
+      <p class="sec-desc">Despite hardships, Afghan creativity has never been extinguished — from ancient poetry to contemporary music and film.</p>
     </div>
     <div class="split reveal">
-      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&q=80" alt="Afghan music" class="split-img">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=700&q=80" alt="Music" class="split-img">
       <div class="split-text">
-        <h3>Music: The Rubab & Beyond</h3>
-        <p>The <strong>rubab</strong> (a short-necked lute) is Afghanistan's national instrument — called the "Lion of Instruments." Traditional music forms include <em>Ghazal</em> poetry-song and lively <em>Attan</em> dance rhythms.</p>
-        <p>Afghan pop music flourished in the 1970s–80s; artists like <strong>Ahmad Zahir</strong> (dubbed "Afghanistan's Elvis") remain deeply beloved. Today a new generation of artists from the diaspora carry this tradition forward globally.</p>
-        <p>Afghan cinema produced memorable films before the 1990s. Internationally, director <strong>Mohsen Makhmalbaf</strong> and documentarians have brought Afghan stories to the world stage.</p>
+        <h3>Music: The Rubab &amp; Beyond</h3>
+        <p>The <strong>rubab</strong> (a short-necked lute) is Afghanistan's national instrument — called the "Lion of Instruments." Traditional forms include <em>Ghazal</em> poetry-song and <em>Attan</em> dance rhythms.</p>
+        <p>Afghan pop music flourished in the 1970s–80s; artists like <strong>Ahmad Zahir</strong> (dubbed "Afghanistan's Elvis") remain deeply beloved. A new generation of diaspora artists carry this tradition forward globally.</p>
+        <p>Afghan cinema produced memorable films before the 1990s. Internationally, documentarians have brought Afghan stories to the world stage.</p>
       </div>
     </div>
-    <br><br>
     <div class="accordion reveal">
       <div class="acc-item">
-        <button class="acc-head" onclick="toggleAcc(this)">
-          <span>Attan — The National Dance</span>
-          <span class="acc-icon">+</span>
-        </button>
-        <div class="acc-body">
-          <p>Attan is Afghanistan's national dance, performed in a circle with synchronized spinning movements. It's performed at weddings, festivals, and gatherings — originally a warrior's pre-battle ritual for Pashtun tribes, now enjoyed across all ethnicities.</p>
-        </div>
+        <button class="acc-head" onclick="toggleAcc(this)"><span>Attan — The National Dance</span><span class="acc-icon">+</span></button>
+        <div class="acc-body"><p>Attan is Afghanistan's national dance, performed in a circle with synchronized spinning movements at weddings, festivals, and gatherings — originally a warrior's pre-battle ritual for Pashtun tribes, now enjoyed by all.</p></div>
       </div>
       <div class="acc-item">
-        <button class="acc-head" onclick="toggleAcc(this)">
-          <span>Afghan Kite Flying — Gudiparan Bazi</span>
-          <span class="acc-icon">+</span>
-        </button>
-        <div class="acc-body">
-          <p>Kite fighting is a beloved Afghan pastime, made globally famous by Khaled Hosseini's novel <em>The Kite Runner</em>. Competitors coat strings in glass powder and try to cut rivals' kite lines. In Kabul's hills, kite season transforms the skyline into a colorful battlefield of silk and string.</p>
-        </div>
+        <button class="acc-head" onclick="toggleAcc(this)"><span>Afghan Kite Flying — Gudiparan Bazi</span><span class="acc-icon">+</span></button>
+        <div class="acc-body"><p>Kite fighting is a beloved Afghan pastime made globally famous by Khaled Hosseini's novel <em>The Kite Runner</em>. Competitors coat strings in glass powder and try to cut rivals' kite lines. In Kabul's hills, kite season transforms the skyline into a colorful battlefield.</p></div>
       </div>
       <div class="acc-item">
-        <button class="acc-head" onclick="toggleAcc(this)">
-          <span>Storytelling & Poetry</span>
-          <span class="acc-icon">+</span>
-        </button>
-        <div class="acc-body">
-          <p>Afghanistan has one of the world's richest oral traditions. The 13th-century Persian-language poet <strong>Rumi</strong> was born in Balkh (modern-day Afghanistan). Poetry competitions (<em>mushairas</em>) and storytelling evenings remain central to social life. Even illiterate Afghans memorize hundreds of poetic couplets.</p>
-        </div>
+        <button class="acc-head" onclick="toggleAcc(this)"><span>Storytelling &amp; Poetry</span><span class="acc-icon">+</span></button>
+        <div class="acc-body"><p>Afghanistan has one of the world's richest oral traditions. The 13th-century poet <strong>Rumi</strong> was born in Balkh (modern-day Afghanistan). Poetry competitions and storytelling evenings remain central to social life — even illiterate Afghans memorize hundreds of poetic couplets.</p></div>
       </div>
     </div>
-    <br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/mSTNi0sMuI0" allowfullscreen loading="lazy" title="Afghan Music"></iframe>
-        </div>
-        <p class="video-label" style="color:var(--gold-light)">Afghan Traditional Music</p>
-      </div>
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/Aa4wqB4TP4s" allowfullscreen loading="lazy" title="Kite Runner Afghanistan"></iframe>
-        </div>
-        <p class="video-label" style="color:var(--gold-light)">Kite Flying Culture</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/mSTNi0sMuI0" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Afghan Traditional Music</p></div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/Aa4wqB4TP4s" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Kite Flying Culture</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 007 LANGUAGES ─── -->
-<div id="languages" style="background:var(--cream)">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">007 — Languages & Dialects</span>
-      <h2 class="section-title">A Symphony of Tongues</h2>
+<!-- 007 LANGUAGES -->
+<div class="sec-cream" id="languages">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">007 — Languages &amp; Dialects</span>
+      <h2 class="sec-title">A Symphony of Tongues</h2>
       <div class="divider"></div>
-      <p class="section-desc">Afghanistan is one of the world's most linguistically rich nations, home to over 40 languages from multiple language families.</p>
+      <p class="sec-desc">Afghanistan is one of the world's most linguistically rich nations, home to over 40 languages from multiple language families.</p>
     </div>
     <div class="split reveal">
       <div class="split-text">
-        <h3>Dari & Pashto — Twin Official Languages</h3>
-        <p><strong>Dari</strong> (Afghan Persian) is the lingua franca spoken by roughly 50% of the population. It's the language of government, literature, and inter-ethnic communication — descendants of the same tongue Rumi used to compose his immortal poetry.</p>
-        <p><strong>Pashto</strong> is spoken by the Pashtun ethnic group (~40%) and has a rich oral poetic tradition — the <em>Landay</em>, short folk couplets composed predominantly by women, is among the world's most distinctive poetic forms.</p>
+        <h3>Dari &amp; Pashto — Twin Official Languages</h3>
+        <p><strong>Dari</strong> (Afghan Persian) is the lingua franca spoken by roughly 50% of the population. It's the language of government, literature, and inter-ethnic communication — the same tongue Rumi used to compose his immortal poetry.</p>
+        <p><strong>Pashto</strong> is spoken by the Pashtun ethnic group (~40%) and has a rich oral tradition. The <em>Landay</em>, short folk couplets composed predominantly by women, is among the world's most distinctive poetic forms.</p>
+        <p>Beyond these, the country recognizes Uzbek, Turkmen, Hazaragi, Balochi, Pashayi, and many more — each a living thread in the nation's cultural fabric.</p>
       </div>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Dari_alphabet.svg/640px-Dari_alphabet.svg.png" alt="Dari Script" class="split-img" onerror="this.src='https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&q=80'">
+      <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=80" alt="Languages and books" class="split-img">
     </div>
     <div class="lang-list reveal">
-      <span class="lang-tag">Dari</span>
-      <span class="lang-tag">Pashto</span>
-      <span class="lang-tag">Uzbek</span>
-      <span class="lang-tag">Hazaragi</span>
-      <span class="lang-tag">Turkmen</span>
-      <span class="lang-tag">Balochi</span>
-      <span class="lang-tag">Nuristani</span>
-      <span class="lang-tag">Pashayi</span>
-      <span class="lang-tag">Brahui</span>
-      <span class="lang-tag">Arabic</span>
+      <span class="lang-tag">Dari</span><span class="lang-tag">Pashto</span><span class="lang-tag">Uzbek</span>
+      <span class="lang-tag">Hazaragi</span><span class="lang-tag">Turkmen</span><span class="lang-tag">Balochi</span>
+      <span class="lang-tag">Nuristani</span><span class="lang-tag">Pashayi</span><span class="lang-tag">Brahui</span><span class="lang-tag">Arabic</span>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/oLbU0jk3kDQ" allowfullscreen loading="lazy" title="Dari Language"></iframe>
-        </div>
-        <p class="video-label">Dari Language Basics</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/oLbU0jk3kDQ" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Dari Language Basics</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 008 SPORTS ─── -->
-<div class="band-sand" id="sports">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">008 — Traditional Sports</span>
-      <h2 class="section-title">Games of the Steppe</h2>
+<!-- 008 SPORTS -->
+<div class="sec-sand" id="sports">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">008 — Traditional Sports</span>
+      <h2 class="sec-title">Games of the Steppe</h2>
       <div class="divider"></div>
-      <p class="section-desc">Afghan traditional sports are rooted in the equestrian culture of Central Asia — dramatic, athletic, and deeply intertwined with cultural identity.</p>
+      <p class="sec-desc">Afghan traditional sports are rooted in the equestrian culture of Central Asia — dramatic, athletic, and deeply intertwined with cultural identity.</p>
     </div>
     <div class="card-grid reveal">
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Buzkashi_afghanistan.jpg/640px-Buzkashi_afghanistan.jpg" alt="Buzkashi" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500&q=80'">
-        <div class="card-body">
-          <h3>Buzkashi — National Sport</h3>
-          <p>Teams of horse-mounted riders compete to grab a goat or calf carcass and deposit it in a goal circle. The sport demands extraordinary horsemanship, strength, and fearlessness. Players (<em>chapandaz</em>) train for decades.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?w=600&q=80" alt="Horse riding" class="card-img">
+        <div class="card-body"><h3>Buzkashi — National Sport</h3><p>Teams of horse-mounted riders compete to grab a calf carcass and deposit it in a goal circle. The sport demands extraordinary horsemanship and fearlessness. Players (<em>chapandaz</em>) train for decades.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=500&q=80" alt="Wrestling" class="card-img">
-        <div class="card-body">
-          <h3>Pahlwani — Afghan Wrestling</h3>
-          <p>A form of traditional wrestling linked to the broader <em>Varzesh-e Bastani</em> (ancient athletic arts). Wrestlers compete at festivals and seasonal fairs — champions earn great community prestige.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=600&q=80" alt="Wrestling" class="card-img">
+        <div class="card-body"><h3>Pahlwani — Afghan Wrestling</h3><p>A form of traditional wrestling linked to the broader <em>Varzesh-e Bastani</em> (ancient athletic arts). Wrestlers compete at festivals and seasonal fairs — champions earn great community prestige.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1569517282132-25d22f4573e6?w=500&q=80" alt="Cricket Afghanistan" class="card-img">
-        <div class="card-body">
-          <h3>Modern Cricket</h3>
-          <p>Afghanistan's cricket team has risen from obscurity to <strong>Test nation status</strong> in 2017 — one of sport's most remarkable stories. Players like Rashid Khan and Mohammad Nabi compete in leagues worldwide.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&q=80" alt="Cricket" class="card-img">
+        <div class="card-body"><h3>Modern Cricket</h3><p>Afghanistan's cricket team rose from obscurity to <strong>Test nation status</strong> in 2017 — one of sport's most remarkable stories. Rashid Khan and Mohammad Nabi are globally renowned.</p></div>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/X1lI8UqXW0s" allowfullscreen loading="lazy" title="Buzkashi Sport"></iframe>
-        </div>
-        <p class="video-label">Buzkashi — National Sport of Afghanistan</p>
-      </div>
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/aOPRGcqFVqs" allowfullscreen loading="lazy" title="Afghan Cricket"></iframe>
-        </div>
-        <p class="video-label">Afghanistan Cricket's Incredible Rise</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/X1lI8UqXW0s" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Buzkashi — National Sport of Afghanistan</p></div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/aOPRGcqFVqs" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Afghanistan Cricket's Incredible Rise</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 009 BEAUTY ─── -->
-<div class="band" id="beauty">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">009 — Asian Beauty</span>
-      <h2 class="section-title" style="color:var(--gold-light)">Afghan Beauty & Adornment</h2>
+<!-- 009 BEAUTY -->
+<div class="sec-lapis" id="beauty">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">009 — Asian Beauty</span>
+      <h2 class="sec-title">Afghan Beauty &amp; Adornment</h2>
       <div class="divider"></div>
-      <p class="section-desc" style="color:rgba(245,234,216,0.75)">From intricate embroidery to kohl-lined eyes and henna-painted hands, Afghan beauty traditions are among the richest in the world.</p>
+      <p class="sec-desc">From intricate embroidery to kohl-lined eyes and henna-painted hands, Afghan beauty traditions are among the richest in the world.</p>
     </div>
     <div class="split reveal">
-      <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=500&q=80" alt="Afghan jewelry" class="split-img">
+      <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=700&q=80" alt="Afghan jewelry" class="split-img">
       <div class="split-text">
         <h3>Jewels of the Silk Road</h3>
         <p>Afghan <strong>lapis lazuli</strong> — one of the world's finest — has adorned royalty from ancient Egypt to the courts of Persia. The deep blue stone mined in Badakhshan province remains a national treasure.</p>
-        <p><strong>Kuchi jewelry</strong>, created by nomadic Kuchi women, features massive silver pieces set with glass stones, lapis, and carnelian — a bold, maximalist aesthetic worn proudly as markers of wealth and identity.</p>
-        <p>Traditional beauty rituals include <em>surma</em> (kohl), henna (<em>hina</em>) patterns on hands and feet for weddings, and <em>attar</em> (rose oil perfume) — saffron rosewater remains the most treasured fragrance.</p>
+        <p><strong>Kuchi jewelry</strong>, created by nomadic Kuchi women, features massive silver pieces set with glass stones, lapis, and carnelian — a bold, maximalist aesthetic worn as markers of wealth and identity.</p>
+        <p>Traditional beauty rituals include <em>surma</em> (kohl), henna patterns on hands for weddings, and <em>attar</em> (rose oil perfume) — saffron rosewater remains the most treasured fragrance.</p>
       </div>
     </div>
-    <br><br>
-    <div class="split reveal reverse">
+    <div class="split reveal" style="margin-top:3rem;">
       <div class="split-text">
         <h3>Traditional Dress — A Living Artwork</h3>
         <p>Afghan dress is a canvas of regional identity. The <strong>Chapan</strong> (embroidered coat), <strong>Perahan tunban</strong> (loose shirt and trousers), and the <em>pakol</em> hat each signal ethnic heritage and regional origin.</p>
         <p>Women's embroidery — especially from <strong>Kandahar</strong> and <strong>Kunduz</strong> — features intricate geometric patterns stitched in silk thread. The <em>Khamak</em> embroidery of Kandahar is recognized globally for its fine craftsmanship.</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=500&q=80" alt="Afghan traditional dress" class="split-img">
+      <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=700&q=80" alt="Beauty and adornment" class="split-img">
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 010 POPULATION ─── -->
-<div id="population" style="background:var(--cream)">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">010 — Population</span>
-      <h2 class="section-title">People of the Land</h2>
+<!-- 010 POPULATION -->
+<div class="sec-cream" id="population">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">010 — Population</span>
+      <h2 class="sec-title">People of the Land</h2>
       <div class="divider"></div>
-      <p class="section-desc">Afghanistan's population is a mosaic of ethnic groups, each with distinct languages, customs, and histories.</p>
+      <p class="sec-desc">Afghanistan's population is a mosaic of ethnic groups, each with distinct languages, customs, and histories.</p>
     </div>
-
-    <div class="stat-row reveal" style="background:var(--lapis); padding:2.5rem; max-width:1200px; margin: 0 auto 3rem;">
-      <div class="stat-box">
-        <span class="stat-num">43M</span>
-        <span class="stat-lbl">Total Population</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">42%</span>
-        <span class="stat-lbl">Pashtun</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">27%</span>
-        <span class="stat-lbl">Tajik</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">9%</span>
-        <span class="stat-lbl">Hazara</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">9%</span>
-        <span class="stat-lbl">Uzbek</span>
-      </div>
-    </div>
-
-    <div class="card-grid reveal">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=500&q=80" alt="Afghan children" class="card-img">
-        <div class="card-body">
-          <h3>A Young Nation</h3>
-          <p>Afghanistan has one of the world's youngest populations — over 60% are under 25. This "youth bulge" represents both a demographic challenge and an enormous potential for future development.</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=80" alt="Afghan ethnic groups" class="card-img">
-        <div class="card-body">
-          <h3>Ethnic Diversity</h3>
-          <p>Pashtuns, Tajiks, Hazaras, Uzbeks, Aimaks, Turkmens, and Balochs compose the major groups. Their distinct cultural contributions weave a rich national tapestry.</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&q=80" alt="Afghan diaspora" class="card-img">
-        <div class="card-body">
-          <h3>Global Diaspora</h3>
-          <p>Over 5 million Afghans live outside the country — in Pakistan, Iran, Germany, the USA, Australia, and beyond. The diaspora community plays a vital role in culture, remittances, and advocacy.</p>
-        </div>
-      </div>
-    </div>
-    <br><br>
-    <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/k9q1YF0Gkjk" allowfullscreen loading="lazy" title="Afghanistan Population"></iframe>
-        </div>
-        <p class="video-label">People & Ethnic Groups of Afghanistan</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ─── 011 COMMUNICATION ─── -->
-<div class="band" id="communication">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">011 — Communication</span>
-      <h2 class="section-title" style="color:var(--gold-light)">Media, Press & Connectivity</h2>
-      <div class="divider"></div>
-      <p class="section-desc" style="color:rgba(245,234,216,0.75)">Despite challenging conditions, Afghanistan built a vibrant media landscape between 2001–2021, and mobile communication transformed connectivity across the country.</p>
+    <div class="stat-band reveal">
+      <div class="stat-box"><span class="stat-num">43M</span><span class="stat-lbl">Total Population</span></div>
+      <div class="stat-box"><span class="stat-num">42%</span><span class="stat-lbl">Pashtun</span></div>
+      <div class="stat-box"><span class="stat-num">27%</span><span class="stat-lbl">Tajik</span></div>
+      <div class="stat-box"><span class="stat-num">9%</span><span class="stat-lbl">Hazara</span></div>
+      <div class="stat-box"><span class="stat-num">9%</span><span class="stat-lbl">Uzbek</span></div>
     </div>
     <div class="card-grid reveal">
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&q=80" alt="Media" class="card-img">
-        <div class="card-body">
-          <h3>Radio — The Lifeline</h3>
-          <p>Radio remains the primary information medium for millions. <strong>BBC Dari/Pashto</strong> and <strong>Radio Free Afghanistan</strong> (RFE/RL) reach rural populations where TV and internet are unavailable.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80" alt="Children" class="card-img">
+        <div class="card-body"><h3>A Young Nation</h3><p>Over 60% of Afghanistan's population is under 25. This "youth bulge" represents both a demographic challenge and an enormous potential for future development.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=500&q=80" alt="Mobile phones" class="card-img">
-        <div class="card-body">
-          <h3>Mobile Revolution</h3>
-          <p>Mobile phone penetration expanded dramatically — from near zero in 2001 to over <strong>22 million subscribers</strong> by 2020. Companies like Roshan and MTN connected previously isolated regions.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Community" class="card-img">
+        <div class="card-body"><h3>Ethnic Diversity</h3><p>Pashtuns, Tajiks, Hazaras, Uzbeks, Aimaks, Turkmens, and Balochs compose the major groups. Their distinct cultural contributions weave a rich national tapestry.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=500&q=80" alt="Afghan journalism" class="card-img">
-        <div class="card-body">
-          <h3>A Free Press Era</h3>
-          <p>From 2001–2021, Afghanistan developed over 100 independent TV channels, 300+ radio stations, and hundreds of newspapers. Afghan journalists showed remarkable courage amid constant danger.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Diaspora" class="card-img">
+        <div class="card-body"><h3>Global Diaspora</h3><p>Over 5 million Afghans live outside the country — in Pakistan, Iran, Germany, the USA, and Australia. The diaspora plays a vital role in culture, remittances, and advocacy.</p></div>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/VH-8kHbXWZM" allowfullscreen loading="lazy" title="Afghan Media"></iframe>
-        </div>
-        <p class="video-label" style="color:var(--gold-light)">Media & Communication in Afghanistan</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/k9q1YF0Gkjk" allowfullscreen loading="lazy"></iframe></div><p class="video-label">People &amp; Ethnic Groups of Afghanistan</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── 012 ENVIRONMENT ─── -->
-<div id="environment" style="background:var(--sand)">
-  <section>
-    <div class="section-header reveal">
-      <span class="section-number">012 — Environment</span>
-      <h2 class="section-title">Natural Wonders</h2>
+<!-- 011 COMMUNICATION -->
+<div class="sec-lapis" id="communication">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">011 — Communication</span>
+      <h2 class="sec-title">Media, Press &amp; Connectivity</h2>
       <div class="divider"></div>
-      <p class="section-desc">From the turquoise lakes of Band-e-Amir to the snowy peaks of the Hindu Kush — Afghanistan's landscapes are staggeringly beautiful and ecologically significant.</p>
+      <p class="sec-desc">Despite challenging conditions, Afghanistan built a vibrant media landscape between 2001–2021, and mobile communication transformed connectivity across the country.</p>
+    </div>
+    <div class="card-grid reveal">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80" alt="Radio" class="card-img">
+        <div class="card-body"><h3>Radio — The Lifeline</h3><p>Radio remains the primary information medium for millions. <strong>BBC Dari/Pashto</strong> and <strong>Radio Free Afghanistan</strong> reach rural populations where TV and internet are unavailable.</p></div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&q=80" alt="Mobile" class="card-img">
+        <div class="card-body"><h3>Mobile Revolution</h3><p>Mobile phone penetration expanded from near zero in 2001 to over <strong>22 million subscribers</strong> by 2020. Companies like Roshan and MTN connected previously isolated regions.</p></div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" alt="Press" class="card-img">
+        <div class="card-body"><h3>A Free Press Era</h3><p>From 2001–2021, Afghanistan developed over 100 independent TV channels, 300+ radio stations, and hundreds of newspapers. Afghan journalists showed remarkable courage amid constant danger.</p></div>
+      </div>
+    </div>
+    <div class="video-grid reveal">
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/VH-8kHbXWZM" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Media &amp; Communication in Afghanistan</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 012 ENVIRONMENT -->
+<div class="sec-sand" id="environment">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-num">012 — Environment</span>
+      <h2 class="sec-title">Natural Wonders</h2>
+      <div class="divider"></div>
+      <p class="sec-desc">From the turquoise lakes of Band-e-Amir to the snowy peaks of the Hindu Kush — Afghanistan's landscapes are staggeringly beautiful and ecologically significant.</p>
     </div>
     <div class="gallery reveal">
-      <img class="g-wide" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Band-e-Amir.jpg/1280px-Band-e-Amir.jpg" alt="Band-e-Amir lakes">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wakhan_corridor_Afghanistan.jpg/640px-Wakhan_corridor_Afghanistan.jpg" alt="Wakhan Corridor" onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80'">
-      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=500&q=80" alt="Afghan mountains">
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500&q=80" alt="Afghan landscape">
+      <div class="g-item g-tall">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80" alt="Mountain landscape">
+      </div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Afghan terrain"></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Mountain valley"></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&q=80" alt="Lake landscape"></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80" alt="Snow peaks"></div>
     </div>
-    <br><br>
     <div class="card-grid reveal">
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Band-e-Amir.jpg/640px-Band-e-Amir.jpg" alt="Band-e-Amir" class="card-img">
-        <div class="card-body">
-          <h3>Band-e-Amir National Park</h3>
-          <p>Afghanistan's first national park, established in 2009. Six deep blue lakes formed by travertine dams sit at 2,900m elevation — often called "the Afghanistan you never imagined."</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Band-e-Amir" class="card-img">
+        <div class="card-body"><h3>Band-e-Amir National Park</h3><p>Afghanistan's first national park (2009). Six deep blue lakes formed by travertine dams sit at 2,900m elevation — often called "the Afghanistan you never imagined."</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80" alt="Hindu Kush" class="card-img">
-        <div class="card-body">
-          <h3>The Hindu Kush</h3>
-          <p>A 800km mountain range with peaks exceeding 7,700m. Home to snow leopards, Marco Polo sheep, and the critically endangered Afghani wild dog (Afghan hound's ancestor).</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Hindu Kush" class="card-img">
+        <div class="card-body"><h3>The Hindu Kush</h3><p>An 800km mountain range with peaks exceeding 7,700m. Home to snow leopards, Marco Polo sheep, and the Afghan hound — one of the oldest dog breeds on Earth.</p></div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80" alt="Wakhan Corridor" class="card-img">
-        <div class="card-body">
-          <h3>The Wakhan Corridor</h3>
-          <p>A narrow strip of land where Afghanistan touches China. One of the world's most remote and stunning landscapes, home to Kyrgyz nomads and Pamir yaks. A trekker's ultimate frontier.</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80" alt="Wakhan" class="card-img">
+        <div class="card-body"><h3>The Wakhan Corridor</h3><p>A narrow strip where Afghanistan touches China. One of the world's most remote landscapes, home to Kyrgyz nomads and Pamir yaks. A trekker's ultimate frontier.</p></div>
       </div>
     </div>
-    <br><br>
     <div class="video-grid reveal">
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/t6VlFOb-M8I" allowfullscreen loading="lazy" title="Band-e-Amir"></iframe>
-        </div>
-        <p class="video-label">Band-e-Amir — Afghanistan's Hidden Gem</p>
-      </div>
-      <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/gJa7yFbdLvI" allowfullscreen loading="lazy" title="Hindu Kush"></iframe>
-        </div>
-        <p class="video-label">The Hindu Kush Mountains</p>
-      </div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/t6VlFOb-M8I" allowfullscreen loading="lazy"></iframe></div><p class="video-label">Band-e-Amir — Afghanistan's Hidden Gem</p></div>
+      <div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/gJa7yFbdLvI" allowfullscreen loading="lazy"></iframe></div><p class="video-label">The Hindu Kush Mountains</p></div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ─── CLOSING QUOTE ─── -->
-<div style="background:var(--lapis); padding: 5rem 2rem; text-align:center;">
+<!-- CLOSING -->
+<div class="closing-band">
   <div class="pull-quote reveal">
-    <p style="color:var(--sand);">"Afghanistan has been the graveyard of empires — and the birthplace of civilizations. The same mountains that stopped armies nurtured a culture of extraordinary depth and beauty."</p>
+    <p>"Afghanistan has been the graveyard of empires — and the birthplace of civilizations. The same mountains that stopped armies nurtured a culture of extraordinary depth and beauty."</p>
     <cite>— About Afghanistan</cite>
   </div>
-  <div class="ornament" style="color:var(--gold);">✦ ◆ ✦</div>
-  <p style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:rgba(245,234,216,0.4); margin-top:1rem;">افغانستان — Afghanistan</p>
+  <div class="ornament">✦ ◆ ✦</div>
+  <p style="font-family:'Montserrat',sans-serif;font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:rgba(245,234,216,0.35);margin-top:0.5rem;">افغانستان — Afghanistan</p>
 </div>
 
-<!-- ─── FOOTER ─── -->
 <footer>
-  <div class="brand">Afghanistan</div>
-  <p style="margin-top:0.5rem;">Land of Light & Legend &bull; Central Asia</p>
-  <br>
-  <p>Created for Asian Countries Project &bull; 2025</p>
-  <p style="margin-top:0.5rem;">Sources: Wikipedia · Unsplash · YouTube · UN Data</p>
+  <div class="footer-brand">Afghanistan</div>
+  <p>Land of Light &amp; Legend &bull; Central Asia</p>
+  <p style="margin-top:0.8rem;">Created for Asian Countries Project &bull; 2025</p>
+  <p>Sources: Unsplash &bull; YouTube &bull; UN Data &bull; Wikipedia</p>
 </footer>
 
 <a href="#top" class="btt" title="Back to Top">↑</a>
 
-<!-- ─── JS ─── -->
 <script>
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        // Animate skill bars inside
-        e.target.querySelectorAll('.skill-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width;
-        });
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Accordion
   function toggleAcc(btn) {
     const body = btn.nextElementSibling;
     const icon = btn.querySelector('.acc-icon');
@@ -1350,22 +634,15 @@
       b.classList.remove('open');
       b.previousElementSibling.querySelector('.acc-icon').textContent = '+';
     });
-    if (!isOpen) {
-      body.classList.add('open');
-      icon.textContent = '−';
-    }
+    if (!isOpen) { body.classList.add('open'); icon.textContent = '−'; }
   }
 
-  // Active nav highlight on scroll
-  const sections = document.querySelectorAll('[id]');
+  const secs = document.querySelectorAll('[id]');
   window.addEventListener('scroll', () => {
     let cur = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 80) cur = s.id;
-    });
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
     document.querySelectorAll('.nav-links a').forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + cur
-        ? 'var(--gold-light)' : '';
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold-light)' : '';
     });
   });
 </script>
